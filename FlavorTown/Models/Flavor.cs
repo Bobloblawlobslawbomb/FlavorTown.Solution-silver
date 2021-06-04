@@ -18,7 +18,7 @@ namespace FlavorTown.Models
     [DisplayName("FirstTaste")]
     [DataType(DataType.Date)]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-    public DateTime FirstTaste { get; set; }
+    public DateTime FirstTasteDate { get; set; }
 
     public virtual ApplicationUser User { get; set; }
     public virtual ICollection<FlavorTreat> JoinEntities { get; }

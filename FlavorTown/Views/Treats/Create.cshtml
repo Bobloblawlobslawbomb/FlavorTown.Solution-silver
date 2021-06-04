@@ -1,0 +1,38 @@
+@{
+  Layout = "_Layout";
+}
+
+@model FlavorTown.Models.Treat
+
+<h4>Add a new Treat:</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model=>model.Name)
+  @Html.TextBoxFor(model=>model.Name)
+  <hr />
+  @Html.LabelFor(model=>model.Description)
+  @Html.TextBoxFor(model=>model.Description)
+  <hr />
+  @Html.LabelFor(model=>model.Ingredients)
+  @Html.TextBoxFor(model=>model.Ingredients)
+  <hr />
+  <p>
+    @Html.LabelFor(model=>model.Rating): (1-5)
+    @Html.RadioButtonFor(m => m.Rating, "1", new { @checked = true })&nbsp;
+    @Html.RadioButtonFor(m => m.Rating, "2")&nbsp;
+    @Html.RadioButtonFor(m => m.Rating, "3")&nbsp;
+    @Html.RadioButtonFor(m => m.Rating, "4")&nbsp;
+    @Html.RadioButtonFor(m => m.Rating, "5")
+  </p>
+  <hr />
+  @Html.LabelFor(model=>model.CreatedDate)
+  @Html.TextBoxFor(model=>model.CreatedDate)
+  <hr />
+  @Html.Label("Select Flavor")
+  @Html.DropDownList("FlavorId")
+
+  <input type="submit" value="Add new Treat" class="btn btn-default" />
+}
+<br>
+<p>@Html.ActionLink("Show all treats", "Index")</p>
+<hr />

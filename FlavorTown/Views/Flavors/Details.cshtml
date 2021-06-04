@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@model FlavorTown.Models.Flavor
+
+<h2>Flavor Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
+<h3>@Html.DisplayNameFor(model => model.FirstTasteDate): @Html.DisplayFor(model => model.FirstTasteDate)</h3>
+<br>
+
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>This flavor is not associated to any treats</p>
+}
+else
+{
+  <h4>Treats this flavor is associated with:</h4>
+  <ol>
+    @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Treat.Name</li>
+      @using (Html.BeginForm("DeleteTreat", "Flavors"))
+      {
+        @Html.Hidden("joinId", @join.FlavorTreatId)
+        <input type="submit" value="Unassign this treat" class="btn btn-warning btn-xs" />
+      }
+    }
+  </ol>
+}
+<br>
+<p>@Html.ActionLink("Edit flavor", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete flavor", "Delete", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<hr />

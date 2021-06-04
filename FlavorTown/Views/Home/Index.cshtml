@@ -1,0 +1,54 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Welcome to the Flavor Town!</h1>
+
+@using FlavorTown.Models
+
+<main class="row">
+  <div class="col-sm-6 text-center">
+    <h2>Treats:</h2>
+    @if (@Model["treats"].Count == 0)
+    {
+      @Html.ActionLink("Add a new treat", "Create", "Treats")
+    }
+    else
+    {
+      <ul>
+        @foreach (Treat treat in @Model["treats"])
+        {
+          @Html.ActionLink($"{treat.Name}", "Details", "Treats", new {id = treat.TreatId})
+          <br>
+        }
+      </ul>
+    }
+  </div>
+
+  <div class="col-sm-6 text-center">
+    <h2>Flavors:</h2>
+    @if (@Model["flavors"].Count == 0)
+    {
+      @Html.ActionLink("Add a new flavor", "Create", "Flavors")
+    }
+    else
+    {
+      <ul>
+        @foreach (Flavor flavor in @Model["flavors"])
+        {
+          @Html.ActionLink($"{flavor.Name}", "Details", "Flavors", new {id = flavor.FlavorId})
+          <br>
+        }
+      </ul>
+    }
+
+  </div>
+
+</main>
+<br>
+<br>
+
+@*I may want to remove the <p> tag*@
+<p id="action">@Html.ActionLink("See all flavors", "Index", "Flavors")&nbsp;&nbsp;
+  @Html.ActionLink("See all treats", "Index", "Treats")&nbsp;&nbsp;
+  @Html.ActionLink("Create an account", "Index", "Account")</p>
