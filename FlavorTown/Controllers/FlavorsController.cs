@@ -7,6 +7,7 @@ using FlavorTown.Models;
 
 namespace FlavorTown
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly FlavorTownContext _db;

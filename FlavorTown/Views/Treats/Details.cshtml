@@ -1,0 +1,46 @@
+@{
+  Layout = "_Layout";
+}
+
+@model FlavorTown.Models.Treat
+
+<h2>Treat Details:</h2>
+<h4>
+  <strong>@Html.DisplayNameFor(model=>model.Name):</strong> @Html.DisplayFor(model=>model.Name)<br><br>
+
+  <strong>@Html.DisplayNameFor(model=>model.Description):</strong>
+  @Html.DisplayFor(model=>model.Description)<br><br>
+
+  <strong>@Html.DisplayNameFor(model=>model.Ingredients):</strong>
+  @Html.DisplayFor(model=>model.Ingredients)<br><br>
+
+  <strong>@Html.DisplayNameFor(model=>model.Rating):</strong> @Html.DisplayFor(model=>model.Rating)<br><br>
+
+  <strong>@Html.DisplayNameFor(model=>model.CreatedDate):</strong> @Html.DisplayFor(model=>model.CreatedDate)
+
+</h4>
+<br>
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>This treat is not associated with any flavors</p>
+}
+else
+{
+  <h4>Flavors the treat has:</h4>
+  <ul>
+    @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Flavor.Name</li>
+      @using (Html.BeginForm("DeleteFlavor", "Treats"))
+      {
+        @Html.Hidden("joinId", @join.FlavorTreatId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add a flavor", "AddFlavor", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit treat", "Edit", new { id = Model.TreatId })</p>@*//feel like this should be 'CategoryId'*@
+<p>@Html.ActionLink("Delete treat", "Delete", new { id = Model.TreatId })</p>

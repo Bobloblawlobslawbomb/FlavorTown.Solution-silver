@@ -16,8 +16,9 @@
   @Html.LabelFor(model=>model.FirstTasteDate)
   @Html.TextBoxFor(model=>model.FirstTasteDate)
   <hr />
-  @Html.Label("Select Taste")
-  @Html.DropDownList("TasteId")
+  @Html.Label("Select Taste") @*james says, "it's best to not include a drop down for join relationships on Create or Edit
+    routes"*@
+  @Html.DropDownList("TasteId") @**@
 
   <input type="submit" value="Add new flavor" class="btn btn-default" />
 }

@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace FlavorTown.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly FlavorTownContext _db;
