@@ -1,18 +1,24 @@
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using FlavorTown.Models;
 using System.Collections.Generic;
 using System.Linq;
-using FlavorTown.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
-namespace FlavorTown
+namespace FlavorTown.Controllers
 {
   [Authorize]
   public class FlavorsController : Controller
   {
     private readonly FlavorTownContext _db;
-    public FlavorsController(FlavorTownContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public FlavorsController(UserManager<ApplicationUser> userManager, FlavorTownContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
     public ActionResult Index()
@@ -25,13 +31,16 @@ namespace FlavorTown
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Flavor flavor, int TreatId)
+    public async Task<ActionResult> Create(Flavor flavor, int TreatId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      flavor.User = currentUser;
       _db.Flavors.Add(flavor);
       _db.SaveChanges();
       if (TreatId != 0)
       {
-        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -55,7 +64,7 @@ namespace FlavorTown
     {
       if (TreatId != 0)
       {
-        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
       }
       _db.Entry(flavor).State = EntityState.Modified;
       _db.SaveChanges();
@@ -72,7 +81,7 @@ namespace FlavorTown
     {
       if (TreatId != 0)
       {
-        _db.FlavorTreats.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -93,8 +102,8 @@ namespace FlavorTown
     [HttpPost]
     public ActionResult DeleteTreat(int joinId)
     {
-      var joinEntry = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
-      _db.FlavorTreats.Remove(joinEntry);
+      var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreat.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

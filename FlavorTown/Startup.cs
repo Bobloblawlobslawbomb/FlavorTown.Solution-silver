@@ -26,7 +26,7 @@ namespace FlavorTown
       services.AddMvc();
 
       services.AddEntityFrameworkMySql()
-        .AddDbContext<FlavorTowntContext>(options => options
+        .AddDbContext<FlavorTownContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
       services.AddIdentity<ApplicationUser, IdentityRole>()
