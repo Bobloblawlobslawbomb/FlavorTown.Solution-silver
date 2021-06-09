@@ -48,7 +48,6 @@
 <br>
 <br>
 
-@*I may want to remove the <p> tag*@
-<p id="action">@Html.ActionLink("See all flavors", "Index", "Flavors")&nbsp;&nbsp;
-  @Html.ActionLink("See all treats", "Index", "Treats")&nbsp;&nbsp;
-  @Html.ActionLink("Create an account", "Index", "Account")</p>
+<p id="action">@Html.ActionLink("See all flavors", "Index", "Flavors", null, new { @class="btn btn-info" })&nbsp;&nbsp;
+  @Html.ActionLink("See all treats", "Index", "Treats", null, new { @class="btn btn-info" })&nbsp;&nbsp;
+  @Html.ActionLink("Create an account", "Index", "Account", null, new { @class="btn btn-success" })</p>
