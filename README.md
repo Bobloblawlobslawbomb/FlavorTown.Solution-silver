@@ -1,7 +1,7 @@
-# Dr. Sillystringz's Factory
+# Pierre's Flavor Town Portal
 
 #### A Brief Description.
-_An MVC 'many-to-many' example project that allows, the unfortunately named Dr. Sillystingz, to view their engineers and machines within their factory._ 
+_An MVC 'many-to-many'/Authentication with Identity example project._ 
 
 ### By Giancarlo Vigneri
 ---
@@ -15,10 +15,11 @@ _An MVC 'many-to-many' example project that allows, the unfortunately named Dr. 
 >* _ASP.NET_
 >* _Entity Framework_
 >* _Bootstrap_
+>* _Identity_
 
 ---
 ## Description 
-The program will allow someone named Dr. Sillystingz to 'manage' their engineers and machines within their factory. The Doctor may see a list of all their engineers as well as a list of all their machines. When creating (hiring) a new engineer ol' Sawbones can enter a first and last name as well as a hired date, they may also choose a machine to associate with this engineer. Creating a listing for a new machine has similar functionality, except machines do not have a surname. The medical practitioner can also add/delete new/old engineers and machines. Within the engineer or machines details page the Doctor can remove machines/engineers associated with each other type respectively.
+The program will allow someone to create an account for Pierre's Flavor Town (geez I hope that's copyrighted). The user can then access the rest of the site which allows said user to create 'Treats' (ex. donuts, maple bars, crullers, etc.), and 'Flavors' (sweet, savory, bitter, nasty). The user can then associate each object with as many of the other type as they see fit.
 
 ---
 
@@ -40,24 +41,24 @@ The program will allow someone named Dr. Sillystingz to 'manage' their engineers
 >* If you set up MySQL Server with a different username and/or password, the command will be `mysql -u[YourUsername] -p[YourPassword]` (omit the square brackets'[ ]')
 
 #### Importing `giancarlo_vigneri.sql` _(the included database .sql file)_:
-> (note: these instructions are only applicable after one has cloned the git repository: "https://github.com/Bobloblawlobslawbomb/Docs-Factory.Solution-train" -- see 'Running the Program' instructions below)
+> (note: these instructions are only applicable after one has cloned the git repository: "https://github.com/Bobloblawlobslawbomb/FlavorTown.Solution-silver" -- see 'Running the Program' instructions below)
 > 1) Open __MySQL Workbench__.
 > 2) In the Navigator > Administration window, select Data Import/Restore.
 > 3) In Import Options select Import from Self-Contained File.
 > 4) Navigate to `giancarlo_vigneri.sql`.
 > 5) Under Default Schema to be Imported To, select the New button.
 > 6) Enter the name of the database.
->    - In this case: `factory`.
+>    - In this case: `flavor_town`.
 > 7) Click Ok.
 > 8) Click Start Import.
 > 9) Reopen the Navigator > Schemas tab. Right click and select Refresh All. _Our new test database will appear._
 
 ### Running the Program:
-> 1) Clone the repository: "https://github.com/Bobloblawlobslawbomb/Docs-Factory.Solution-train"
-> 2) Navigate to the 'Factory.Solution/' directory on your computer
+> 1) Clone the repository: "https://github.com/Bobloblawlobslawbomb/FlavorTown.Solution-silver"
+> 2) Navigate to the 'FlavorTown.Solution/' directory on your computer
 > 3) Open with your favorite text editor (Visual Studio Code, is a pretty sweet one)
 > 4) To run the web app:
->   - Navigate to `Factory.Solution/Factory` in your command line
+>   - Navigate to `FlavorTown.Solution/FlavorTown` in your command line
 >   - Run the command `touch appsettings.json`
     - open the newly created "appsettings.json" file
     - add the following code to the .json file:
@@ -69,7 +70,7 @@ The program will allow someone named Dr. Sillystingz to 'manage' their engineers
 >    }
 >    ```
    >*_NOTE: make sure that [YOUR USERNAME] and [YOUR PASSWORD] match the database username and password of your local MySQL server (omit the square brackets. Also note: port 3306 is the default)_
-> - Run the command `dotnet restore` to restore the dependencies that are listed in `Factory.csproj`
+> - Run the command `dotnet restore` to restore the dependencies that are listed in `FlavorTown.csproj`
 >  - Run the command `dotnet build` to build the project and its dependencies into a set of binaries.
 > - Finally, run the command `dotnet run` to run the project!
 > - Note: `dotnet run` also restores and builds the project, so you can use this single command to start the console app.
@@ -88,4 +89,4 @@ _if you do run into any issues or have questions, ideas, or concerns; I would gr
 ## Contact Information
 _Contact Giancarlo Vigneri at: bobloblaw.vigneri@gmail.com_ 
 
-(There are 10 types of people in this world; those who understand binary and those who don't.)
+(A person walks into a bar and asks for helicopter flavored chips. The bartender says, "Sorry. We only have plain.")
